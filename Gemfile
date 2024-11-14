@@ -31,7 +31,11 @@ gem "tzinfo-data", platforms: %i[ mswin mswin64 mingw x64_mingw jruby ]
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 gem 'omniauth-google-oauth2'
-gem 'devise'
+gem 'omniauth'
+gem 'omniauth-rails_csrf_protection'
+gem 'bootstrap', '~> 5.3.0'
+gem 'sassc-rails'
+gem 'pry'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"

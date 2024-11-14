@@ -8,6 +8,13 @@ Rails.application.routes.draw do
   # Render dynamic PWA files from app/views/pwa/*
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
+  get '/auth/:provider/callback', to: 'sessions#create'  # Callback for Google OAuth
+  get '/logout', to: 'sessions#destroy', as: :logout 
+  get '/auth/failure', to: redirect('/')   # Logout route
+  root 'users#home' 
+  resources "companies"
+  resources "employees"
+  resources "reimbursements"
 
   # Defines the root path route ("/")
   # root "posts#index"

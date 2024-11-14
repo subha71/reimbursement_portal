@@ -13,3 +13,8 @@
  *= require_tree .
  *= require_self
  */
+ @import "bootstrap";
+ .nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0; /* optional: adjust dropdown position if needed */
+  }
