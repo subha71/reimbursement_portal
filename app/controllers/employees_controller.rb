@@ -5,7 +5,7 @@ class EmployeesController < ApplicationController
     conditions = []
     conditions << ["employees.company_id = '#{params[:company_id]}' "] if params[:company_id].present?
     conditions << ["employees.email ilike '%#{params[:email]}%' "] if params[:email].present?
-    @employees = Employee.includes(:company).where(conditions.join(' AND ')).page(params[:page]).per(10)
+    @employees = Employee.includes(:company).where(conditions.join(' AND ')).order('created_at desc').page(params[:page]).per(10)
   end
 
   def new

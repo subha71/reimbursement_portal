@@ -25,7 +25,7 @@ class ReimbursementsController < ApplicationController
     conditions = []
     conditions << ["employees.company_id = '#{params[:company_id]}' "] if params[:company_id].present?
     conditions << ["employees.email ILIKE '%#{params[:email]}%' "] if params[:email].present?
-    @reimbursements = Reimbursement.includes(employee: :company).joins(:employee).where(conditions.join(' AND ')).order('created_at desc').page(params[:page]).per(10)
+    @reimbursements = Reimbursement.includes(employee: :company).with_attached_receipt.joins(:employee).where(conditions.join(' AND ')).order('created_at desc').page(params[:page]).per(10)
   end
 
 

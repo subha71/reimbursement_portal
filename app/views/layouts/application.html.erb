@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reimbursement Portal</title>
+    <title>Employee Portal</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
@@ -16,7 +16,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <%= link_to 'Reimbursement Portal', root_path, class: 'navbar-brand' %>
+    <%= link_to 'Employee Portal', root_path, class: 'navbar-brand' %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -33,10 +33,6 @@
                 <%= link_to 'Logout', logout_path, method: :get, class: 'dropdown-item' %>
               </li>
             </ul>
-          </li>
-        <% else %>
-          <li class="nav-item">
-            <%= link_to 'Login with Google', '/auth/google_oauth2', class: 'btn btn-outline-primary' %>
           </li>
         <% end %>
       </ul>
