@@ -1,20 +1,29 @@
 <h2>Submit a Reimbursement Claim</h2>
 
-<%= form_with model: @reimbursement, local: true, html: { multipart: true } do |form| %>
- <%= form.hidden_field :employee_id, value: params[:employee_id] %>
+<% if @reimbursement.errors.any? %>
+  <div class="alert alert-danger">
+    <ul>
+      <% @reimbursement.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with model: [@employee, @reimbursement], local: true, html: { multipart: true } do |form| %>
   <div class="mb-3">
     <%= form.label :purpose %>
-    <%= form.text_area :purpose, class: 'form-control', required: true %>
+    <%= form.text_area :purpose, class: 'form-control', required: true, autocomplete: 'off' %>
   </div>
 
   <div class="mb-3">
     <%= form.label :amount %>
-    <%= form.number_field :amount, class: 'form-control', step: 0.01, required: true %>
+    <%= form.number_field :amount, class: 'form-control', step: 0.01, required: true, autocomplete: 'off' %>
   </div>
 
   <div class="mb-3">
     <%= form.label :date_of_expenditure %>
-    <%= form.date_field :date_of_expenditure, class: 'form-control', required: true %>
+    <%= form.date_field :date_of_expenditure, class: 'form-control', required: true, autocomplete: 'off' %>
   </div>
 
   <div class="mb-3">

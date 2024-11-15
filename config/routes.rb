@@ -12,9 +12,12 @@ Rails.application.routes.draw do
   get '/logout', to: 'sessions#destroy', as: :logout 
   get '/auth/failure', to: redirect('/')   # Logout route
   root 'users#home' 
-  resources "companies"
-  resources "employees"
-  resources "reimbursements"
+  resources :companies
+  resources :employees
+  resources :employees do
+    resources :reimbursements, only: [:new, :create]
+  end
+  resources :reimbursements, only: [:index, :show, :edit, :update, :destroy]
 
   # Defines the root path route ("/")
   # root "posts#index"

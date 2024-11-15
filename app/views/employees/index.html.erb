@@ -57,7 +57,7 @@
           <td><%= employee.email %></td>
           <td>
             <%= link_to 'Initiate Claim', 
-                        new_reimbursement_path(employee_id: employee.id), 
+                        new_employee_reimbursement_path(employee), 
                         class: 'btn btn-success btn-sm' %>
           </td>
         </tr>
