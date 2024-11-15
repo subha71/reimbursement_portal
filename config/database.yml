@@ -80,6 +80,4 @@ test:
 #
 production:
   <<: *default
-  database: reimbursement_portal_production
-  username: reimbursement_portal
-  password: <%= ENV["REIMBURSEMENT_PORTAL_DATABASE_PASSWORD"] %>
+  database: <%= DATABASE_URL %>
