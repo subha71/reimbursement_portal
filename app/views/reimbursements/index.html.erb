@@ -1,0 +1,73 @@
+<h2>Reimbursements</h2>
+<div class="card mb-3">
+  <div class="card-body">
+    <%= form_with url: reimbursements_path, method: :get, local: true do |form| %>
+      <div class="row align-items-end g-3">
+        <div class="col-md-4">
+          <%= form.label :company_id, 'Filter by Company', class: 'form-label' %>
+          <%= form.collection_select :company_id,
+                                  @companies,
+                                  :id,
+                                  :name,
+                                  { include_blank: 'All Companies',
+                                  selected: params[:company_id] },
+                                  { class: 'form-select' } %>
+        </div>
+
+        <div class="col-md-4">
+          <%= form.label :email, 'Search by Email', class: 'form-label' %>
+          <%= form.text_field :email,
+                            class: 'form-control',
+                            value: params[:email],
+                            placeholder: 'Enter employee Email' %>
+        </div>
+
+        <div class="col-md-4">
+          <%= form.submit 'Filter', class: 'btn btn-primary me-2' %>
+          <%= link_to 'Clear', employees_path, class: 'btn btn-outline-secondary' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="d-flex justify-content-between mb-3">
+  <%= link_to 'Add New Claim', employees_path, class: 'btn btn-primary' %>
+  <small class="text-muted pt-2">
+    Showing <%= @reimbursements.offset_value + 1 %> to <%= @reimbursements.offset_value + @reimbursements.length %> of <%= @reimbursements.total_count %> reimbursements
+  </small>
+</div>
+<div class="table-responsive">
+    <table class="table table-hover">
+    <thead class="table-light">
+        <tr>
+        <th>ID</th>
+        <th>Employee email</th>
+        <th>Company name</th>
+        <th>Purpose</th>
+        <th>Amount</th>
+        <th>Date of Expenditure</th>
+        <th>Receipt</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @reimbursements.each do |reimbursement| %>
+        <tr>
+            <td><%= reimbursement.id %></td>
+            <td><%= reimbursement.employee.email %></td>
+            <td><%= reimbursement.employee.company.name%>
+            <td><%= reimbursement.purpose %></td>
+            <td><%= reimbursement.amount %></td>
+            <td><%= reimbursement.date_of_expenditure %></td>
+            <td><% if reimbursement.receipt.attached? %>
+                    <%= link_to 'Download', url_for(reimbursement.receipt), target: '_blank', class: 'btn btn-outline-success btn-sm' %>
+                <% else %>
+                    <span class="text-muted">No Receipt</span>
+                <% end %></td>
+        </tr>
+        <% end %>
+    </tbody>
+  </table>
+</div>
+<div class="d-flex justify-content-center mt-3">
+  <%= paginate @reimbursements, window: 2, outer_window: 1 %>
+</div>

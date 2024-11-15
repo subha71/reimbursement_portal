@@ -1,0 +1,20 @@
+<h2>Create a New Employee</h2>
+
+<%= form_with model: @employee, local: true do |form| %>
+  <div class="mb-3">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: 'form-control', required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :email %>
+    <%= form.email_field :email, class: 'form-control', required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :company_id, "Company" %>
+    <%= form.collection_select :company_id, @companies, :id, :name, prompt: 'Select a company', class: 'form-control' %>
+  </div>
+
+  <%= form.submit 'Create Employee', class: 'btn btn-primary' %>
+<% end %>
